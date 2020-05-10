@@ -146,21 +146,24 @@ export class AuthService implements OnDestroy {
     this._user.next(user);
     //this.autoLogout(user.tokenDuration);
     this.storeAuthData(
-      userData.userId      
+      userData.userId,
+      userData.token,
+      userData.email,
+      userData.username      
     );
   }
 
   private storeAuthData(
-    userId: string,``
+    userId: string,
     token: string,
-    tokenExpirationDate: string,
-    email: string
+    email: string,
+    username: string
   ) {
     const data = JSON.stringify({
       userId: userId,
       token: token,
-      tokenExpirationDate: tokenExpirationDate,
-      email: email
+      email: email,
+      username: username
     });
     Plugins.Storage.set({ key: 'authData', value: data });
   }
