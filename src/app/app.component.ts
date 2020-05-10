@@ -1,43 +1,58 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { LanguageService } from './services/language.service';
+import { MenuController } from '@ionic/angular';
+import { Subscription } from 'rxjs';
+import { OrintationService } from './services/orintation.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.scss']
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy {
   public selectedIndex = 0;
   public appPages = [
     {
-      title: 'Home',
+      title: 'PAGES.home',
       url: '/home',
       icon: 'mail'
     },
     {
-      title: 'My Appointments',
+      title: 'PAGES.appointment',
       url: '/appointments',
       icon: 'paper-plane'
     },
     {
-      title: 'My Profile',
+      title: 'PAGES.profile',
       url: '/profile',
       icon: 'heart'
     },
     {
-      title: 'My Addresses',
+      title: 'PAGES.addresses',
       url: '/addresses',
       icon: 'archive'
+    },
+    {
+      title: 'PAGES.language',
+      url: '/setting',
+      icon: 'language'
     }    
   ];
- 
+  public menuDir = 'start';
+  
+  private lngSub: Subscription;
+
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
-    private statusBar: StatusBar
+    private statusBar: StatusBar,
+    private LanguageService: LanguageService,
+    private menu: MenuController,
+    private orientService: OrintationService    
   ) {
     this.initializeApp();
   }
@@ -46,13 +61,26 @@ export class AppComponent implements OnInit {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+      this.LanguageService.SetInitialAppLanguage();      
     });
   }
 
   ngOnInit() {
-    const path = window.location.pathname.split('folder/')[1];
+    const path = window.location.pathname;
     if (path !== undefined) {
-      this.selectedIndex = this.appPages.findIndex(page => page.title.toLowerCase() === path.toLowerCase());
+      this.selectedIndex = this.appPages.findIndex(page => page.url === path);
     }
+    
+    this.lngSub = this.LanguageService.langChanged.subscribe(
+      (lang: string) => {
+        //location.reload();
+      });
+
   }
+
+  ngOnDestroy() {
+    this.lngSub.unsubscribe();
+  } 
+  
+  
 }

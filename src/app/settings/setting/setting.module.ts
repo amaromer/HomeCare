@@ -4,9 +4,9 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { HomePageRoutingModule } from './home-routing.module';
+import { SettingPageRoutingModule } from './setting-routing.module';
 
-import { HomePage } from './home.page';
+import { SettingPage } from './setting.page';
 import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
@@ -14,9 +14,9 @@ import { TranslateModule } from '@ngx-translate/core';
     CommonModule,
     FormsModule,
     IonicModule,
-    HomePageRoutingModule,
+    SettingPageRoutingModule,
     TranslateModule
   ],
-  declarations: [HomePage]
+  declarations: [SettingPage]
 })
-export class HomePageModule {}
+export class SettingPageModule {}

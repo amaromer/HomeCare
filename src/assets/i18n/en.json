@@ -1,0 +1,11 @@
+{
+    "PAGES": {
+        "home": "Home",
+        "appointment": "My Appointment",
+        "profile": "My Profile",
+        "addresses": "My Addresses",
+        "language": "Language",
+        "settings": "Settings"
+
+    }
+}

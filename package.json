@@ -1,8 +1,8 @@
 {
-  "name": "HomeCare",
+  "name": "homecare",
   "version": "0.0.1",
-  "author": "Ionic Framework",
-  "homepage": "https://ionicframework.com/",
+  "author": "Teamway",
+  "homepage": "https://teamway.om/",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -23,6 +23,9 @@
     "@ionic-native/splash-screen": "^5.0.0",
     "@ionic-native/status-bar": "^5.0.0",
     "@ionic/angular": "^5.0.0",
+    "@ionic/storage": "^2.2.0",
+    "@ngx-translate/core": "^12.1.2",
+    "@ngx-translate/http-loader": "^4.0.0",
     "core-js": "^2.5.4",
     "rxjs": "~6.5.1",
     "tslib": "^1.9.0",
@@ -51,5 +54,5 @@
     "tslint": "~5.15.0",
     "typescript": "~3.4.3"
   },
-  "description": "An Ionic project"
+  "description": "Your Home Service"
 }

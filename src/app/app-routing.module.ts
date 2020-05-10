@@ -28,6 +28,14 @@ const routes: Routes = [
   {
     path: 'addresses',
     loadChildren: () => import('./addresses/addresses.module').then( m => m.AddressesPageModule)
+  },
+  {
+    path: 'setting',
+    loadChildren: () => import('./settings/setting/setting.module').then( m => m.SettingPageModule)
+  },
+  {
+    path: 'cart',
+    loadChildren: () => import('./cart/cart.module').then( m => m.CartPageModule)
   }
 ];
 

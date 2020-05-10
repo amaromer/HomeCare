@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { AppointmentsPageRoutingModule } from './appointments-routing.module';
 
 import { AppointmentsPage } from './appointments.page';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    AppointmentsPageRoutingModule
+    AppointmentsPageRoutingModule,
+    TranslateModule
   ],
   declarations: [AppointmentsPage]
 })
