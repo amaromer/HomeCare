@@ -10,7 +10,7 @@ export interface AuthResponseData {
   userId: string;
   email: string;
   username: string;
-  token: string;     
+  phone: string;      
 }
 
 @Injectable({
@@ -19,13 +19,13 @@ export interface AuthResponseData {
 export class AuthService implements OnDestroy {
   private _user = new BehaviorSubject<User>(null);
   private activeLogoutTimer: any;
-  url: string;
+  private url = "https://theplatform-x.com/homecare/index.php/public_calls/authenticate_app";
 
   get userIsAuthenticated() {
     return this._user.asObservable().pipe(
       map(user => {
         if (user) {
-          return !!user.token;
+          return !!user.id;
         } else {
           return false;
         }
@@ -45,17 +45,7 @@ export class AuthService implements OnDestroy {
     );
   }
 
-  get token() {
-    return this._user.asObservable().pipe(
-      map(user => {
-        if (user) {
-          return user.token;
-        } else {
-          return null;
-        }
-      })
-    );
-  }
+  
 
   constructor(private http: HttpClient) {}
 
@@ -66,27 +56,23 @@ export class AuthService implements OnDestroy {
           return null;
         }
         const parsedData = JSON.parse(storedData.value) as {
-          token: string;
-          tokenExpirationDate: string;
-          userId: string;
-          email: string;
+          userId: string,    
+          email: string,
+          username: string,
+          phone: string
         };
-        const expirationTime = new Date(parsedData.tokenExpirationDate);
-        if (expirationTime <= new Date()) {
-          return null;
-        }
+      
         const user = new User(
           parsedData.userId,
-          parsedData.email,
-          parsedData.token,
-          expirationTime
+          parsedData.email,          
+          parsedData.username,
+          parsedData.phone
         );
         return user;
       }),
       tap(user => {
         if (user) {
-          this._user.next(user);
-          this.autoLogout(user.tokenDuration);
+          this._user.next(user);        
         }
       }),
       map(user => {
@@ -107,9 +93,11 @@ export class AuthService implements OnDestroy {
     return this.http
       .post<AuthResponseData>(
         this.url,
-        { email: email, password: password }
+        { phone: email, password: password }
       )
-      .pipe(tap(this.setUserData.bind(this)));
+      .pipe(        
+        tap(this.setUserData.bind(this))       
+      );
   }
 
   logout() {
@@ -126,42 +114,33 @@ export class AuthService implements OnDestroy {
     }
   }
 
-  private autoLogout(duration: number) {
-    if (this.activeLogoutTimer) {
-      clearTimeout(this.activeLogoutTimer);
-    }
-    this.activeLogoutTimer = setTimeout(() => {
-      this.logout();
-    }, duration);
-  }
-
-  private setUserData(userData: AuthResponseData) {
+  private setUserData(userData) {
+   
     const user = new User(
-      userData.userId,
-      userData.email,
-      userData.username,
-      userData.token       
+      userData.user_info.id,
+      userData.user_info.email,
+      userData.user_info.first_name,
+      userData.user_info.phone       
     );
-
+    
     this._user.next(user);
-    //this.autoLogout(user.tokenDuration);
     this.storeAuthData(
-      userData.userId,
-      userData.token,
-      userData.email,
-      userData.username      
+      userData.user_info.id,      
+      userData.user_info.email,
+      userData.user_info.first_name,
+      userData.user_info.phone      
     );
   }
 
   private storeAuthData(
-    userId: string,
-    token: string,
+    userId: string,    
     email: string,
-    username: string
+    username: string,
+    phone: string
   ) {
     const data = JSON.stringify({
       userId: userId,
-      token: token,
+      phone: phone,
       email: email,
       username: username
     });

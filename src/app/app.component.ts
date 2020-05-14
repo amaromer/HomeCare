@@ -37,6 +37,11 @@ export class AppComponent implements OnInit, OnDestroy {
       icon: 'archive'
     },
     {
+      title: 'PAGES.login',
+      url: '/auth',
+      icon: 'log-in'
+    },
+    {
       title: 'PAGES.language',
       url: '/setting',
       icon: 'language'

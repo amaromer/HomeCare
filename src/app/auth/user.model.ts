@@ -3,11 +3,8 @@ export class User {
     public id: string,
     public email: string,
     public username: string,
-    private _token: string    
-  ) {}
-
-  get token() {
-    return this._token;
-  }
+    public phone: string
+    
+  ) {}  
   
 }
