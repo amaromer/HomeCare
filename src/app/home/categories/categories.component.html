@@ -1,0 +1,9 @@
+<ion-list>
+  <ion-list-header><h2>{{ 'TITLES.services' | translate }}</h2></ion-list-header>
+  <ion-item detail *ngFor="let service of mainCat">
+    <ion-avatar slot="start">
+      <img src="assets/images/wrench.png">
+    </ion-avatar>
+    <ion-label routerLink="/categories">{{ service.title }}</ion-label>
+  </ion-item>  
+</ion-list>

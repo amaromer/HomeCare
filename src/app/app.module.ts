@@ -34,7 +34,7 @@ export function createTranslateLoader (http: HttpClient) {
         deps: [HttpClient]
       }
     })
-  ],
+  ],  
   providers: [
     StatusBar,
     SplashScreen,

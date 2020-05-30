@@ -1,6 +1,11 @@
 // Ionic Variables and Theming. For more info, please see:
 // http://ionicframework.com/docs/theming/
 
+@font-face {
+  font-family: Tajwal;
+  src: url(../assets/fonts/Tajawal-Bold.ttf);  
+}
+
 /** Ionic CSS Variables **/
 :root {
   /** primary **/
@@ -74,6 +79,8 @@
   --ion-color-light-contrast-rgb: 0, 0, 0;
   --ion-color-light-shade: #d7d8da;
   --ion-color-light-tint: #f5f6f9;
+
+  --ion-font-family: Tajwal, Arial, Helvetica, sans-serif;
 }
 
 @media (prefers-color-scheme: dark) {

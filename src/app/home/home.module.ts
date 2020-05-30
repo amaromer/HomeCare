@@ -8,6 +8,8 @@ import { HomePageRoutingModule } from './home-routing.module';
 
 import { HomePage } from './home.page';
 import { TranslateModule } from '@ngx-translate/core';
+import { CategoriesComponent } from './categories/categories.component';
+import { SharedModule } from '../components/shared.module';
 
 @NgModule({
   imports: [
@@ -15,8 +17,12 @@ import { TranslateModule } from '@ngx-translate/core';
     FormsModule,
     IonicModule,
     HomePageRoutingModule,
-    TranslateModule
+    TranslateModule,
+    SharedModule    
   ],
-  declarations: [HomePage]
+  declarations: [
+    HomePage, 
+    CategoriesComponent    
+  ]
 })
 export class HomePageModule {}

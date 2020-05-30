@@ -28,5 +28,7 @@ export class HomePage implements OnInit {
     slides.startAutoplay();
   }
 
+  goToCartPage() {}
+
 
 }

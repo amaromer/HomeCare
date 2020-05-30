@@ -1,6 +1,7 @@
 {
     "PAGES": {
         "home": "Home",
+        "categories": "Categories",
         "appointment": "My Appointment",
         "profile": "My Profile",
         "addresses": "My Addresses",
@@ -8,5 +9,8 @@
         "settings": "Settings",
         "login": "Log In"
 
+    },
+    "TITLES": {
+        "services": "Services"
     }
 }

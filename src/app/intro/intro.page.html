@@ -1,0 +1,31 @@
+<ion-content class="content">
+  <img class="imgBg" src="assets/becrux/images/starter/intro_top_bg.png" />
+  <ion-slides pager="true" #IonSlides class="slides" loop="true" no-padding (ionSlideDidChange)="slideChanged()">
+    <ion-slide #IonSlides *ngFor="let slide of slides; let i=index" no-padding>
+      <span no-padding>
+        <ion-row class="ion-justify-content-center">
+          <img src="{{slide.image}}" alt="Slide Images">
+        </ion-row>
+        <ion-row class="row-icon" justify-content-center>
+          <ion-icon name="{{slide.icon}}"></ion-icon>
+        </ion-row>
+        <ion-row justify-content-center>
+          <h2>{{slide.title}}</h2>
+        </ion-row>
+        <ion-row justify-content-center>
+          <ion-col>
+            <p>{{slide.text}}</p>
+          </ion-col>
+        </ion-row>
+        <ion-row class="row-skip">
+          <ion-button *ngIf="!visiable" (click)="goToHomeEcom()" fill="outline">
+            Skip
+          </ion-button>
+          <ion-button *ngIf="visiable" (click)="goToHomeEcom()" fill="outline">
+            Done
+          </ion-button>
+        </ion-row>
+      </span>
+    </ion-slide>
+  </ion-slides>
+</ion-content>

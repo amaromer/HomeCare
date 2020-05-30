@@ -1,6 +1,7 @@
 {
     "PAGES": {
         "home": "الرئيسية",
+        "categories": "الخدمات",
         "appointment": "طلباتي",
         "profile": "ملفي",
         "addresses": "عنوايني",
@@ -9,5 +10,8 @@
         "login": "تسجيل الدخول" 
 
 
+    },
+    "TITLES": {
+        "services": "الخدمات"
     }
 }

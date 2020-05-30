@@ -1,0 +1,14 @@
+ion-title{
+    text-align: center;
+    //width: 131%;
+}
+ion-buttons{
+    ion-icon{
+        font-size: 22px;
+    }
+    ion-badge{
+        position: absolute;
+        right: 5px;
+        bottom: 14px;
+    }
+}

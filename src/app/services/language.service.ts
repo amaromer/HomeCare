@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Storage } from '@ionic/storage';
 import { OrintationService } from './orintation.service';
-import { Subject } from 'rxjs';
 
 
 export const LNG_KEY = 'SELECTED_LANGUAGE';
@@ -11,8 +10,7 @@ export const LNG_KEY = 'SELECTED_LANGUAGE';
   providedIn: 'root'
 })
 export class LanguageService {
-  selected = '';
-  langChanged = new Subject<string>();
+  public SelLang = 'ar';
 
   constructor(
     private translate: TranslateService,
@@ -20,17 +18,16 @@ export class LanguageService {
     private orientation: OrintationService
     ) { }
 
-    SetInitialAppLanguage() {    
+    async SetInitialAppLanguage() {    
       this.translate.setDefaultLang('ar');
-      this.orientation.setReadingDirection('rtl');   
+      this.orientation.setReadingDirection('rtl');     
       
-      this.storage.get(LNG_KEY).then(val => {
+     await this.storage.get(LNG_KEY).then(val => {
         if (val) {
           this.setLanguage(val);
-          this.selected = val;                  
+          this.SelLang = val;                          
         }
-      });
-      
+      });      
     }
     
     getLanguage() {
@@ -42,15 +39,17 @@ export class LanguageService {
 
     setLanguage(lng: string) {
       this.translate.use(lng);
-      this.selected = lng;
+     
       this.storage.set(LNG_KEY, lng);
+
+      this.SelLang = lng;
+
       if (lng == 'ar') {
         this.orientation.setReadingDirection('rtl');
       } else {
         this.orientation.setReadingDirection('ltr');
-      }
-      // this.langChanged.next(lng);
-      //location.reload();
+      }      
+      
     }
 
    
