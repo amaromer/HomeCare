@@ -11,6 +11,7 @@ export class CategoriesPage implements OnInit {
   constructor(private catSrv:CategoriesService) { }
 
   ngOnInit() {
+    
     this.catSrv.getCats().subscribe(
       data => {
         console.log(data);

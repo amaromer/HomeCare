@@ -8,6 +8,7 @@ import { AddressesPageRoutingModule } from './addresses-routing.module';
 
 import { AddressesPage } from './addresses.page';
 import { TranslateModule } from '@ngx-translate/core';
+import { SharedModule } from '../components/shared.module';
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import { TranslateModule } from '@ngx-translate/core';
     FormsModule,
     IonicModule,
     AddressesPageRoutingModule,
-    TranslateModule
+    TranslateModule,
+    SharedModule
   ],
   declarations: [AddressesPage]
 })

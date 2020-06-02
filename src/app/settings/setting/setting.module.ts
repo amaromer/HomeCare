@@ -8,6 +8,7 @@ import { SettingPageRoutingModule } from './setting-routing.module';
 
 import { SettingPage } from './setting.page';
 import { TranslateModule } from '@ngx-translate/core';
+import { SharedModule } from 'src/app/components/shared.module';
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import { TranslateModule } from '@ngx-translate/core';
     FormsModule,
     IonicModule,
     SettingPageRoutingModule,
-    TranslateModule
+    TranslateModule,
+    SharedModule
   ],
   declarations: [SettingPage]
 })

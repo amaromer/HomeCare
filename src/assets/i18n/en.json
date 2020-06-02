@@ -11,6 +11,9 @@
 
     },
     "TITLES": {
-        "services": "Services"
+        "services": "Services",
+        "menu": "Menu",
+        "app": "Home Care",
+        "languages": "languages"
     }
 }
