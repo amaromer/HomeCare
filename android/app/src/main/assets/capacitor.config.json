@@ -1,0 +1,13 @@
+{
+  "appId": "om.teamway.homecare",
+  "appName": "HomeCare",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "www",
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 0
+    }
+  },
+  "cordova": {}
+}
