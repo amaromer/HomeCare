@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { CategoriesService } from './categories.service';
 
 @Component({
   selector: 'app-categories',
@@ -8,15 +7,16 @@ import { CategoriesService } from './categories.service';
 })
 export class CategoriesPage implements OnInit {
 
-  constructor(private catSrv:CategoriesService) { }
+  public services = [
+    { val: 'Pepperoni', isChecked: true },
+    { val: 'Sausage', isChecked: false },
+    { val: 'Mushroom', isChecked: false }
+  ];
 
-  ngOnInit() {
+  constructor() { }
+
+  ngOnInit() {  
     
-    this.catSrv.getCats().subscribe(
-      data => {
-        console.log(data);
-      }
-    )
   }
 
 }
