@@ -7,7 +7,11 @@ const routes: Routes = [
   {
     path: '',
     component: AddressesPage
+  },  {
+    path: 'address',
+    loadChildren: () => import('./address/address.module').then( m => m.AddressPageModule)
   }
+
 ];
 
 @NgModule({

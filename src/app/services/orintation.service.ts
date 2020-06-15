@@ -10,7 +10,7 @@ export class OrintationService {
   constructor(@Inject(DOCUMENT) private doc) {}
 
   public setReadingDirection(dir: ReadingDirection) {
-    this.doc.dir = dir;
+    this.doc.dir = dir;    
     this.Direction = dir;
   }
 }

@@ -1,7 +1,17 @@
 <app-header [title] = "'PAGES.addresses'"></app-header>
 
 <ion-content [fullscreen]="true">
-    <div id="container">
-   
+  <div id="container">
+      <ion-card class="ion-padding" *ngFor="let item of adresses">
+        <ion-card-title>
+          <ion-icon name="location-outline"></ion-icon>
+            {{item.title}}
+        </ion-card-title>
+        <ion-card-content>
+           {{item.address}} <br>
+           {{item.location.lat}} + {{item.location.lng}}
+        </ion-card-content>
+        <ion-button fill="outline" routerLink="address">{{'TITLES.edit' | translate}}</ion-button>
+      </ion-card>
   </div>
 </ion-content>

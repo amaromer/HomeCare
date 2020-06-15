@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { CartService } from '../services/cart.service';
+import { Router } from '@angular/router';
+import { CategoriesService } from './categories.service';
+import { LanguageService } from '../services/language.service';
+import { service } from '../service.model';
 
 @Component({
   selector: 'app-categories',
@@ -7,16 +12,53 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CategoriesPage implements OnInit {
 
-  public services = [
-    { val: 'Pepperoni', isChecked: true },
-    { val: 'Sausage', isChecked: false },
-    { val: 'Mushroom', isChecked: false }
-  ];
+  services= [];
+  ar: boolean;
 
-  constructor() { }
+  constructor(private CartSrv: CartService, 
+              private router:Router, 
+              private catSrv: CategoriesService, 
+              private lngSrv: LanguageService) { }
 
   ngOnInit() {  
-    
+
+    if (this.lngSrv.SelLang == 'ar') {
+      this.ar = true;
+    }
+
+    const path = window.location.pathname.split('categories/')[1];    
+    var srv = this.catSrv.getServices(path);   
+    this.services = srv[0].service;
+    console.log(this.services);
+    this.services.forEach(function(item){
+      item.isChecked = false;
+    })
+  }
+
+  checkout() {
+  
+   this.CartSrv.emptyCart();
+   this.services.forEach(function(service){
+       if (service.isChecked) {
+          var title = service.title;
+          if (this.ar) {
+             title = service.artitle;
+          } 
+          this.CartSrv.addProduct({
+            id: service.id,
+            item: title,
+            price: service.price
+          })
+       }
+     }, this);
+
+     //this.router.navigateByUrl('/chekout');
+     //console.log(this.CartSrv.getCart());
+
+
+
+
+
   }
 
 }

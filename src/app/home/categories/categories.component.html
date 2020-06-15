@@ -1,9 +1,22 @@
-<ion-list>
-  <ion-list-header><h2>{{ 'TITLES.services' | translate }}</h2></ion-list-header>
-  <ion-item detail *ngFor="let service of mainCat">
-    <ion-avatar slot="start">
-      <img src="assets/images/wrench.png">
-    </ion-avatar>
-    <ion-label routerLink="/categories">{{ service.title }}</ion-label>
-  </ion-item>  
-</ion-list>
+<h5 class="ion-padding">{{ 'TITLES.services' | translate }}</h5>
+<ion-grid class="ion-no-padding">
+  <ion-row class="ion-no-padding">
+    <ion-col *ngFor="let service of mainCat" 
+      class="animate-item" size="6"
+      class="ion-no-padding"
+      routerLink="/categories/{{service.id}}">
+      <ion-card style="text-align: center; margin: 5px; padding: 20px 0px">
+        <ion-avatar style="text-align: center; margin: 0 auto;">
+          <img src="{{service.imageUrl}}" />
+        </ion-avatar>
+        <ion-text>
+          <h6 *ngIf="ar; else en">{{service.artitle}}</h6>
+          <ng-template #en>
+            <h6>{{service.title}}</h6>
+          </ng-template>            
+        </ion-text>
+      </ion-card>
+    </ion-col>
+
+  </ion-row>
+</ion-grid>

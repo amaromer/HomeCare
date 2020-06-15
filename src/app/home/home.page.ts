@@ -13,9 +13,9 @@ export class HomePage implements OnInit {
     speed: 300
   }];
   sliders = [
-    {id: 0, image: "assets/slides/1.png", item: "First Slide"},
-    {id: 1, image: "assets/slides/2.png", item: "Second Slide"},
-    {id: 2, image: "assets/slides/3.png", item: "Third Slide"}
+    {id: 0, image: "assets/slides/1.jpg", item: "First Slide"},
+    {id: 1, image: "assets/slides/2.jpg", item: "Second Slide"},
+    {id: 2, image: "assets/slides/3.jpg", item: "Third Slide"}
   ];
 
   constructor() { }

@@ -12,9 +12,12 @@
 
     },
     "TITLES": {
-        "services": "الخدمات",
+        "services": "ما هي المشكلة التي تواجهك؟",
         "menu": "القائمة",
         "app": "هوم كير",
-        "languages": "اللغات"
-    }
+        "languages": "اللغات",
+        "edit": "تعديل",
+        "edit_address": "تعديل العنوان"
+    },
+    "address_title": "Address Title"
 }

@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar color='primary'>
+    <ion-title>Check out</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row *ngFor="let item of cart">
+      <ion-col>
+         {{item.item}}
+      </ion-col>
+      <ion-col>
+          {{item.price}}
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>Total:</ion-col>
+      <ion-col>{{sum}}</ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

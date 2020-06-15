@@ -18,6 +18,10 @@ export class SettingPage implements OnInit {
 
   setLang(lng) {
     this.lngService.setLanguage(lng);
+    setTimeout(() => {
+      window.location.reload();
+    }, 1000);
+   
   }
 
 }

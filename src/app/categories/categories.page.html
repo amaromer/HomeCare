@@ -1,16 +1,25 @@
 <ion-header>
-    <ion-toolbar color='primary'>
-      <ion-buttons slot="start">
-        <ion-back-button></ion-back-button>
-      </ion-buttons>
-    </ion-toolbar>
-  </ion-header>
+  <ion-toolbar color='primary'>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
 
 <ion-content>
     <ion-list>
         <ion-item *ngFor="let entry of services">
-            <ion-label>{{entry.val}}</ion-label>
+            <ion-label>
+              <span *ngIf = "ar; else en">{{entry.artitle}}</span> 
+              <ng-template #en>
+                <span>{{entry.title}}</span>
+              </ng-template>      
+              
+              - {{entry.price}} OMR
+            </ion-label>
             <ion-checkbox slot="end" [(ngModel)]="entry.isChecked"></ion-checkbox>
         </ion-item>
+
+        <ion-button class="ion-padding ion-center" expand="block" (click)="checkout()" routerLink="/checkout">checkout</ion-button>
     </ion-list>
 </ion-content>

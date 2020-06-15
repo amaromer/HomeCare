@@ -11,9 +11,12 @@
 
     },
     "TITLES": {
-        "services": "Services",
+        "services": "Which problem you are faciing ?",
         "menu": "Menu",
         "app": "Home Care",
-        "languages": "languages"
-    }
+        "languages": "languages",
+        "edit": "Edit",
+        "edit_address": "Edit Address"
+    },
+    "address_title": "Address Title"
 }

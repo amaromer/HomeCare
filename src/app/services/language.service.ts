@@ -48,7 +48,9 @@ export class LanguageService {
         this.orientation.setReadingDirection('rtl');
       } else {
         this.orientation.setReadingDirection('ltr');
-      }      
+      }   
+      
+     
       
     }
 
