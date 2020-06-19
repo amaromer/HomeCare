@@ -16,7 +16,19 @@
         "app": "Home Care",
         "languages": "languages",
         "edit": "Edit",
-        "edit_address": "Edit Address"
+        "delete": "Delete",
+        "add_address": "Add Address",
+        "edit_address": "Edit Address",
+        "login": "Login & Register",
+        "login_phrase": "Please Login to create account"
+    
     },
-    "address_title": "Address Title"
+    "address_title": "Address Title",
+    "address_desc": "Address",
+    "total": "Total",
+    "address": "Address",
+    "no_categories": "No Categories",
+    "no_service": "NO Services",
+    "omr": "OMR",
+    "order": "ORDER"
 }

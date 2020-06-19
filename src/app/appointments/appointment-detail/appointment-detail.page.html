@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar color='primary'>
+    <ion-title> {{'order' | translate}} #{{order_id}}</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>  
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-list>
+    <ion-item style="background-color: blue;" *ngFor="let item of order?.items"> 
+      <ion-text style="width: 50%" slot="start">
+        {{item.item}}
+      </ion-text>
+      <ion-text slot="end">
+        {{item.price}} {{ 'omr' | translate }}
+      </ion-text>
+    </ion-item>
+    <ion-item style="background-color: blue;"> 
+      <ion-text slot="start">
+        {{'total' | translate}}:
+      </ion-text>
+      <ion-text slot="end">
+        {{order?.total}} {{ 'omr' | translate }}
+      </ion-text>
+    </ion-item>
+  </ion-list>
+
+</ion-content>

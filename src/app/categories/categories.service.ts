@@ -2,6 +2,17 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Category } from '../cat.model';
 
+interface cat_data {
+  categories: 
+  {
+    id: string;
+    title: string;
+    title_ar: string;
+    cat_services: {id: string; title: string; rate: string; ar_title: string} [];
+    icon: string;
+  }[]
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -36,14 +47,19 @@ export class CategoriesService {
   constructor(private http:HttpClient) { }
 
     getCats() {
-      return this.Cats;
+      //return this.Cats;      
+      return this.http.get<cat_data>(this.url);
     }    
 
     getServices(cat){
-      const services = this.Cats.filter((a) => {
-        return a.id == cat;
-      });
-      return services;
+      // const services = this.Cats.filter((a) => {
+      //   return a.id == cat;
+      // });
+      // return services;
+      
+
+
+
     }
 
 }

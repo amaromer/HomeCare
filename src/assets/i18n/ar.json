@@ -17,7 +17,19 @@
         "app": "هوم كير",
         "languages": "اللغات",
         "edit": "تعديل",
-        "edit_address": "تعديل العنوان"
+        "delete": "حذف",
+        "edit_address": "تعديل العنوان",
+        "add_address": "اضافة عنوان",
+        "login":"تسجيل الدخول",
+        "login_phrase": "الرجاء تسجيل الدخول لحسابك"
     },
-    "address_title": "Address Title"
+    "address_title": "اسم العنوان",
+    "address_desc": "العنوان",
+    "total": "المجموع",
+    "address": "العنوان",
+    "no_categories": "لا توجد خدمات",
+    "no_service": "لا توجد خدمات",
+    "omr": "ر.ع",
+    "order": "طلب"
+
 }

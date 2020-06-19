@@ -7,6 +7,12 @@
 </ion-header>
 
 <ion-content>
+
+  <div *ngIf="isLoading" class="ion-text-center">
+    <ion-spinner color="primary"></ion-spinner>
+  </div>
+
+  <div id="container"  *ngIf="!isLoading && services.length > 0">
     <ion-list>
         <ion-item *ngFor="let entry of services">
             <ion-label>
@@ -22,4 +28,8 @@
 
         <ion-button class="ion-padding ion-center" expand="block" (click)="checkout()" routerLink="/checkout">checkout</ion-button>
     </ion-list>
+  </div>
+  <div *ngIf="!isLoading && services.length == 0"> 
+   {{'no_service' | translate }}
+</div>
 </ion-content>

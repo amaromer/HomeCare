@@ -5,6 +5,7 @@ import { last, map, switchMap } from 'rxjs/operators';
 
 interface backend_address {
   locations_data:{
+    id: string;
     title: string;
     lat: string;
     log: string;
@@ -22,8 +23,8 @@ export class AddressService {
   url = "https://theplatform-x.com/homecare/index.php/public_calls/";
 
   Address: Address[] = [
-    {title: "Home", address: "Al khwair 33", location: {lat: 25.123123, lng: 12.232393}, staticMapImageUrl:"", user_id: 1},
-    {title: "Office", address: "Uthaiba 18 nov st", location: {lat: 25.123123, lng: 12.232393}, staticMapImageUrl: "", user_id: 1}
+    {id: "1", title: "Home", address: "Al khwair 33", location: {lat: 25.123123, lng: 12.232393}, staticMapImageUrl:"", user_id: 1},
+    {id: "2", title: "Office", address: "Uthaiba 18 nov st", location: {lat: 25.123123, lng: 12.232393}, staticMapImageUrl: "", user_id: 1}
   ];
 
   
@@ -37,7 +38,7 @@ export class AddressService {
       map(data => {
         let items: Address[] = []
         data.locations_data.forEach(item => {
-          items.push({title: item.title, address:item.address, location:{lat: +item.lat, lng: +item.log}, staticMapImageUrl:"", user_id:+item.client_id})
+          items.push({id:item.id ,title: item.title, address:item.address, location:{lat: +item.lat, lng: +item.log}, staticMapImageUrl:"", user_id:+item.client_id})
         });
         return items;
       })

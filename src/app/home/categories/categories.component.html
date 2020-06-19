@@ -1,7 +1,8 @@
 <h5 class="ion-padding">{{ 'TITLES.services' | translate }}</h5>
+
 <ion-grid class="ion-no-padding">
-  <ion-row class="ion-no-padding">
-    <ion-col *ngFor="let service of mainCat" 
+  <ion-row class="ion-no-padding" *ngIf="!isLoading && mainCat.length > 0">
+    <ion-col *ngFor="let service of mainCat"
       class="animate-item" size="6"
       class="ion-no-padding"
       routerLink="/categories/{{service.id}}">
@@ -17,6 +18,12 @@
         </ion-text>
       </ion-card>
     </ion-col>
-
   </ion-row>
+  <ion-row *ngIf="isLoading" class="ion-text-center">
+    <ion-spinner color="primary"></ion-spinner>
+  </ion-row>
+  <ion-row *ngIf="!isLoading && mainCat.length == 0"> 
+    {{'no_categories' | translate }}
+  </ion-row>
+
 </ion-grid>

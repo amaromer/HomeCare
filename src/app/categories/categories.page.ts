@@ -14,6 +14,7 @@ export class CategoriesPage implements OnInit {
 
   services= [];
   ar: boolean;
+  isLoading: boolean = false;
 
   constructor(private CartSrv: CartService, 
               private router:Router, 
@@ -27,12 +28,28 @@ export class CategoriesPage implements OnInit {
     }
 
     const path = window.location.pathname.split('categories/')[1];    
-    var srv = this.catSrv.getServices(path);   
-    this.services = srv[0].service;
-    console.log(this.services);
-    this.services.forEach(function(item){
-      item.isChecked = false;
-    })
+    this.isLoading = true; 
+    this.catSrv.getCats().subscribe(
+      data => {
+        let cat = data.categories.filter(cat => {
+          return cat.id == path
+        });       
+        //console.log(cat);
+        cat.forEach(item => {
+          this.services = [...item.cat_services.map(item => {
+            let service: service = {
+              id: +item.id,
+              title: item.title,
+              artitle: item.ar_title,
+              description: "",
+              price: +item.rate
+            }
+          return service;    
+          })];
+        });
+        this.isLoading = false;
+      }
+    );   
   }
 
   checkout() {
@@ -52,13 +69,7 @@ export class CategoriesPage implements OnInit {
        }
      }, this);
 
-     //this.router.navigateByUrl('/chekout');
-     //console.log(this.CartSrv.getCart());
-
-
-
-
-
+    
   }
 
 }

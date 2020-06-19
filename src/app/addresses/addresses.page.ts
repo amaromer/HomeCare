@@ -14,7 +14,8 @@ import { Subscription } from 'rxjs';
 
 export class AddressesPage implements OnInit {
 
-  adresses: Address[];
+  isLoading: boolean = false;
+  adresses: Address[] = [];
   sub: Subscription;
   constructor(private addressSrv: AddressService) { }
 
@@ -29,10 +30,13 @@ export class AddressesPage implements OnInit {
 
 
   ionViewWillEnter() {
+  this.isLoading = true; 
    this.sub = this.addressSrv.getAddresses()
     .subscribe(
       items => {
         this.adresses = [...items];
+        //this.adresses = [];
+        this.isLoading = false;
       }
     );
   }
@@ -41,6 +45,10 @@ export class AddressesPage implements OnInit {
     if (this.sub) {
       this.sub.unsubscribe();
     }
+  }
+
+  onDelete() {
+    
   }
 
 }

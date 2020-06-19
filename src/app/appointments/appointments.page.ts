@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LanguageService } from '../services/language.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-appointments',
@@ -8,6 +9,7 @@ import { LanguageService } from '../services/language.service';
 })
 export class AppointmentsPage implements OnInit {
 
+  isLoading: boolean = false;
   data_en = [
     {
       date: "13 June",
@@ -41,7 +43,7 @@ export class AppointmentsPage implements OnInit {
     }
   ]
   data = [];
-  constructor(private lngSrv: LanguageService) { }
+  constructor(private lngSrv: LanguageService, private http: HttpClient) { }
 
   ngOnInit() {
     if (this.lngSrv.SelLang == 'ar') {
@@ -49,6 +51,42 @@ export class AppointmentsPage implements OnInit {
     } else {
       this.data = [...this.data_en];
     }
+
+    let url = "https://www.theplatform-x.com/homecare/index.php/public_calls/list_my_orders";
+    let body = {
+      customer_id: 1
+    }
+
+    this.isLoading = true;
+    this.http.post(url, JSON.stringify(body)).subscribe(
+      data => {
+        //console.log(data);
+        let filtered = data.invoice_data.filter(item => item.invoice_value != 0);
+
+        console.log(filtered);
+        this.data = [...filtered.map(item => {
+          return {
+            date: item.bill_date,
+            id: item.id,
+            address: item.loc_title,
+            total: item.invoice_value,
+            items: [...item.items_data.map(d => {
+              return {
+                id: d.id,
+                item: d.title,
+                price: d.rate
+              }
+            })]
+          }
+        })];
+        this.isLoading = false;
+      },
+      error => {
+        console.log(error);
+      }
+    )
+
+    
   }
 
 }

@@ -1,7 +1,13 @@
 <app-header [title] = "'PAGES.addresses'"></app-header>
 
 <ion-content [fullscreen]="true">
-  <div id="container">
+
+  <div *ngIf="isLoading" class="ion-text-center">
+    <ion-spinner color="primary"></ion-spinner>
+  </div>
+
+  <div id="container"  *ngIf="!isLoading && adresses.length > 0"> 
+    
       <ion-card class="ion-padding" *ngFor="let item of adresses">
         <ion-card-title>
           <ion-icon name="location-outline"></ion-icon>
@@ -11,7 +17,19 @@
            {{item.address}} <br>
            {{item.location.lat}} + {{item.location.lng}}
         </ion-card-content>
-        <ion-button fill="outline" routerLink="address">{{'TITLES.edit' | translate}}</ion-button>
+        <ion-button fill="outline" routerLink="edit-address/{{item.title}}">{{'TITLES.edit' | translate}}</ion-button>
+        <ion-button color="danger" fill="outline" (click)="onDelete()">{{'TITLES.delete' | translate}}</ion-button>
       </ion-card>
+
   </div>
+
+  <div *ngIf="!isLoading && adresses.length == 0"> 
+      NO Address Found
+  </div>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button routerLink="address">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>

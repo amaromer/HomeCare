@@ -4,22 +4,19 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { CategoriesPageRoutingModule } from './categories-routing.module';
+import { AppointmentDetailPageRoutingModule } from './appointment-detail-routing.module';
 
-import { CategoriesPage } from './categories.page';
-import { SharedModule } from '../components/shared.module';
+import { AppointmentDetailPage } from './appointment-detail.page';
 import { TranslateModule } from '@ngx-translate/core';
-
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    CategoriesPageRoutingModule,
-    SharedModule,
+    AppointmentDetailPageRoutingModule,
     TranslateModule
   ],
-  declarations: [CategoriesPage]
+  declarations: [AppointmentDetailPage]
 })
-export class CategoriesPageModule {}
+export class AppointmentDetailPageModule {}
