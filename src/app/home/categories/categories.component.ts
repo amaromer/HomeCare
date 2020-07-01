@@ -25,11 +25,12 @@ export class CategoriesComponent implements OnInit {
     this.isLoading = true;
     this.catSrv.getCats().subscribe (
       data => {
+        console.log(data);
           data.categories.forEach(item => {
             this.mainCat.push({
               id: +item.id, 
               title: item.title,
-              artitle: item.title_ar, 
+              artitle: item.ar_title, 
               imageUrl: item.icon, 
               description:"", 
               service: [...item.cat_services.map

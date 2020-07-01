@@ -1,8 +1,38 @@
-<app-header [title] = "'PAGES.profile'"></app-header>
-
-<ion-content [fullscreen]="true">
-  
-  <div id="container">
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button expand="block" routerLink="/home" routerDirection="backward">
+        <ion-icon class="multi-purpose-toolbar-icon" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>{{'PAGES.profile' | translate }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="content">
+  <div class="div-bg-top"></div>
+  <div class="div-card-avatar">
+    <ion-card class="card-avatar">
+      <ion-avatar>
+        <img src="assets/avatar.png" />
+      </ion-avatar>
+      <p>{{user.username}}</p>      
+    </ion-card>
     
   </div>
+  <form>
+    <ion-list>
+      <ion-card *ngFor="let item of Items" class="card-input">
+        <ion-item class="animated fadeInRight item-input" lines="none">
+          <ion-label position="floating">{{item.placeHolder | translate}}</ion-label>
+          <ion-input placeholder="{{item.placeHolder | translate}}" type="{{item.type}}" value="{{item.bindingText}}"></ion-input>
+        </ion-item>
+      </ion-card>
+    </ion-list>
+  </form>
 </ion-content>
+<ion-footer>
+  <ion-button (click)="update()">
+    {{'update' | translate}}
+    <ion-icon name="edit"></ion-icon>
+  </ion-button>
+</ion-footer>

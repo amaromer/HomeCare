@@ -7,6 +7,7 @@ import { switchMap, map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { of } from 'rxjs';
 import { MapModalComponent } from '../../map-modal/map-modal.component';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-location-picker',
@@ -23,28 +24,29 @@ export class LocationPickerComponent implements OnInit {
     private modalCtrl: ModalController,
     private http: HttpClient,
     private actionSheetCtrl: ActionSheetController,
-    private alertCtrl: AlertController) { }
+    private alertCtrl: AlertController,
+    private transSrv: TranslateService) { }
 
   ngOnInit() {}
   
   onPickLocation() {
     this.actionSheetCtrl
       .create({
-        header: 'Please Choose',
+        header: this.transSrv.instant('please_choose'),
         buttons: [
           {
-            text: 'Auto-Locate',
+            text: this.transSrv.instant('auto_locate'),
             handler: () => {
               this.locateUser();
             }
           },
           {
-            text: 'Pick on Map',
+            text: this.transSrv.instant('pick_on_map'),
             handler: () => {
               this.openMap();
             }
           },
-          { text: 'Cancel', role: 'cancel' }
+          { text: this.transSrv.instant('cancel'), role: 'cancel' }
         ]
       })
       .then(actionSheetEl => {
@@ -101,6 +103,7 @@ export class LocationPickerComponent implements OnInit {
 
   private createPlace(lat: number, lng: number) {
     const pickedLocation: Address = {
+      id: "",
       location: {
       lat: lat,
       lng: lng},

@@ -18,13 +18,13 @@
            {{item.location.lat}} + {{item.location.lng}}
         </ion-card-content>
         <ion-button fill="outline" routerLink="edit-address/{{item.title}}">{{'TITLES.edit' | translate}}</ion-button>
-        <ion-button color="danger" fill="outline" (click)="onDelete()">{{'TITLES.delete' | translate}}</ion-button>
+        <ion-button color="danger" fill="outline" (click)="onDelete(item.id)">{{'TITLES.delete' | translate}}</ion-button>
       </ion-card>
 
   </div>
 
   <div *ngIf="!isLoading && adresses.length == 0"> 
-      NO Address Found
+      {{"no_address" | translate}}
   </div>
 
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">

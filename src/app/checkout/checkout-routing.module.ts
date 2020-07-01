@@ -3,10 +3,15 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { CheckoutPage } from './checkout.page';
 
+
 const routes: Routes = [
   {
     path: '',
     component: CheckoutPage
+  },
+  {
+    path: 'order-complete',
+    loadChildren: () => import('./order-complete/order-complete.module').then( m => m.OrderCompletePageModule)
   }
 ];
 

@@ -10,7 +10,8 @@ export interface AuthResponseData {
   userId: string;
   email: string;
   username: string;
-  phone: string;      
+  phone: string; 
+  client_id: string;     
 }
 
 @Injectable({
@@ -47,6 +48,11 @@ export class AuthService implements OnDestroy {
     );
   }
 
+
+  get user(){
+    return this._user;
+  }
+
   
 
   constructor(private http: HttpClient) {}
@@ -61,14 +67,16 @@ export class AuthService implements OnDestroy {
           userId: string,    
           email: string,
           username: string,
-          phone: string
+          phone: string,
+          client_id: string
         };
       
         const user = new User(
           parsedData.userId,
           parsedData.email,          
           parsedData.username,
-          parsedData.phone
+          parsedData.phone,
+          parsedData.client_id
         );
         return user;
       }),
@@ -83,12 +91,13 @@ export class AuthService implements OnDestroy {
     );
   }
 
-  signup(email: string, password: string) {
+  signup(email: string, password: string, email2: string, name: string) {
+    let url = "https://www.theplatform-x.com/homecare/index.php/public_calls/register_in_app";
     return this.http
-      .post<AuthResponseData>(this.url,
-        { email: email, password: password }
+      .post<AuthResponseData>(url,
+        JSON.stringify({ phone:email, email:email2, password: password, full_name: name})
       )
-      .pipe(tap(this.setUserData.bind(this)));
+     .pipe(tap(this.setUserData.bind(this)));
   }
 
   login(email: string, password: string) {
@@ -122,7 +131,8 @@ export class AuthService implements OnDestroy {
       userData.user_info.id,
       userData.user_info.email,
       userData.user_info.first_name,
-      userData.user_info.phone       
+      userData.user_info.phone,
+      userData.user_info.client_id      
     );
     
     this._user.next(user);
@@ -130,7 +140,8 @@ export class AuthService implements OnDestroy {
       userData.user_info.id,      
       userData.user_info.email,
       userData.user_info.first_name,
-      userData.user_info.phone      
+      userData.user_info.phone,
+      userData.user_info.client_id      
     );
   }
 
@@ -138,13 +149,15 @@ export class AuthService implements OnDestroy {
     userId: string,    
     email: string,
     username: string,
-    phone: string
+    phone: string,
+    client_id: string,
   ) {
     const data = JSON.stringify({
       userId: userId,
       phone: phone,
       email: email,
-      username: username
+      username: username,
+      client_id: client_id
     });
     Plugins.Storage.set({ key: 'authData', value: data });
   }

@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { CategoriesService } from './categories.service';
 import { LanguageService } from '../services/language.service';
 import { service } from '../service.model';
+import { TranslateService } from '@ngx-translate/core';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-categories',
@@ -19,7 +21,9 @@ export class CategoriesPage implements OnInit {
   constructor(private CartSrv: CartService, 
               private router:Router, 
               private catSrv: CategoriesService, 
-              private lngSrv: LanguageService) { }
+              private lngSrv: LanguageService,
+              private translate: TranslateService,
+              private alertCtrl: AlertController) { }
 
   ngOnInit() {  
 
@@ -52,7 +56,7 @@ export class CategoriesPage implements OnInit {
     );   
   }
 
-  checkout() {
+ async checkout() {
   
    this.CartSrv.emptyCart();
    this.services.forEach(function(service){
@@ -67,7 +71,24 @@ export class CategoriesPage implements OnInit {
             price: service.price
           })
        }
-     }, this);
+    }, this);
+
+    let cart = this.CartSrv.getCart();
+    if (cart.length == 0) {
+      const alert = await this.alertCtrl.create({
+        cssClass: 'my-custom-class',
+        header: this.translate.instant('alert'),
+        subHeader: this.translate.instant('no_servive_selected'),
+        message: this.translate.instant('no_service_selected_message'),
+        buttons: [this.translate.instant('ok')]
+      });
+  
+      await alert.present();
+    } else {
+      this.router.navigateByUrl("/checkout");
+    }
+
+
 
     
   }

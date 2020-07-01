@@ -21,6 +21,7 @@ interface backend_address {
 export class AddressService {
 
   url = "https://theplatform-x.com/homecare/index.php/public_calls/";
+  public user;
 
   Address: Address[] = [
     {id: "1", title: "Home", address: "Al khwair 33", location: {lat: 25.123123, lng: 12.232393}, staticMapImageUrl:"", user_id: 1},
@@ -30,16 +31,20 @@ export class AddressService {
   
   constructor(private http: HttpClient) { }
 
-  getAddresses() {
+  getAddresses(client_id) {
    
+    let data = {user_id: client_id};
     let url = this.url + "show_customer_locations";
-    return this.http.get<backend_address>(url)
+    return this.http.post<backend_address>(url, data)
     .pipe(
       map(data => {
-        let items: Address[] = []
-        data.locations_data.forEach(item => {
-          items.push({id:item.id ,title: item.title, address:item.address, location:{lat: +item.lat, lng: +item.log}, staticMapImageUrl:"", user_id:+item.client_id})
-        });
+        let items: Address[] = [];
+       
+        if (data.locations_data) {
+          data.locations_data.forEach(item => {
+            items.push({id:item.id ,title: item.title, address:item.address, location:{lat: +item.lat, lng: +item.log}, staticMapImageUrl:"", user_id:+item.client_id})
+          });
+        }
         return items;
       })
     );
@@ -61,5 +66,14 @@ export class AddressService {
     return this.http.post(url,JSON.stringify(body));
 
     
+  }
+
+  deleteAddress(address_id: string) {
+    const url = this.url + "delete_customer_locations";
+    let body = {
+      id: address_id
+    };
+
+    return this.http.post(url,JSON.stringify(body));
   }
 }

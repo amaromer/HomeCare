@@ -1,6 +1,7 @@
 import { Component, OnInit, AfterViewInit, OnDestroy, ElementRef, ViewChild, Input, Renderer2 } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { environment } from 'src/environments/environment';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-map-modal',
@@ -11,13 +12,14 @@ export class MapModalComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('map', { static: false }) mapElementRef: ElementRef;
   @Input() center = { lat:23.595245, lng: 58.357450 };
   @Input() selectable = true;
-  @Input() closeButtonText = 'Cancel';
-  @Input() title = 'Pick Location';
+  @Input() closeButtonText = this.translate.instant('cancel');
+  @Input() title = this.translate.instant('pick_location');
   clickListener: any;
   googleMaps: any;
   constructor( 
     private modalCtrl: ModalController,
-    private renderer: Renderer2) { }
+    private renderer: Renderer2,
+    private translate: TranslateService) { }
 
   ngOnInit() {}
 

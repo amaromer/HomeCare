@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+//import { stat } from 'fs';
 
 @Component({
   selector: 'app-appointment-detail',
@@ -29,17 +30,23 @@ export class AppointmentDetailPage implements OnInit {
     this.http.post(url, JSON.stringify(body)).subscribe(
       data => {
         //console.log(data);
-        let order = data.invoice_data.filter(item =>
+        let order = data['invoice_data'].filter(item =>
           item.id == this.order_id
         );
 
         
         this.order = [...order.map(item => {
+          if (item.status == 'draft') {
+            var status = "New";
+          } else {
+            status = item.status;
+          }
           return {
             date: item.bill_date,
             id: item.id,
             address: item.loc_title,
             total: item.invoice_value,
+            stat: status,
             items: [...item.items_data.map(d => {
               return {
                 id: d.id,

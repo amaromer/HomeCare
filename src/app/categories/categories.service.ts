@@ -7,7 +7,7 @@ interface cat_data {
   {
     id: string;
     title: string;
-    title_ar: string;
+    ar_title: string;
     cat_services: {id: string; title: string; rate: string; ar_title: string} [];
     icon: string;
   }[]

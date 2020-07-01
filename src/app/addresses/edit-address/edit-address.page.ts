@@ -3,7 +3,8 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AddressService } from '../address.service';
 import { filter } from 'rxjs/operators';
 import { Address } from '../address.model';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
   selector: 'app-edit-address',
@@ -15,16 +16,33 @@ export class EditAddressPage implements OnInit {
   Address: Address;
   isLoading: boolean = true;
   address_title;
+  user;
 
-  constructor(private addressSrv:AddressService,  private route: ActivatedRoute) { }
+  constructor(
+    private addressSrv:AddressService,  
+    private route: ActivatedRoute, 
+    private autSrv: AuthService, 
+    private router: Router ) { }
 
   ngOnInit() {
 
     this.route.paramMap.subscribe(parm => {
       this.address_title = parm.get('place_id');
-    })
+    });
 
-    this.addressSrv.getAddresses().subscribe(
+    this.autSrv.userIsAuthenticated.subscribe(
+      user => {
+        if (!user) {
+          this.router.navigateByUrl('/home');
+        } else {
+           this.autSrv.user.subscribe(user => {
+             this.user = user.id
+           });
+        }
+      }
+    )
+
+    this.addressSrv.getAddresses(this.user).subscribe(
         
         items => {
           this.isLoading = true;

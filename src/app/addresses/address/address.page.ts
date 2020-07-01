@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { LoadingController } from '@ionic/angular';
 import { AddressService } from '../address.service';
 import { from } from 'rxjs';
+import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
   selector: 'app-address',
@@ -13,14 +14,29 @@ import { from } from 'rxjs';
 })
 export class AddressPage implements OnInit {
   form: FormGroup;
+  user;
 
 
   constructor(
     private router: Router,
     private loadingCtrl: LoadingController,
-    private addressSrv: AddressService) { }
+    private addressSrv: AddressService,
+    private authSrv: AuthService) { }
 
   ngOnInit() {
+
+    this.authSrv.userIsAuthenticated.subscribe(
+      user => {
+        if (!user) {
+          this.router.navigateByUrl('/home');
+        } else {
+           this.authSrv.user.subscribe(user => {
+             this.user = user.id
+           });
+        }
+      }
+    )
+
     this.form = new FormGroup({
       title: new FormControl(null, {
         updateOn: 'blur',
@@ -51,11 +67,12 @@ export class AddressPage implements OnInit {
         loadingEl.present();
 
         let address: Address = {
+          id: "",
           title: this.form.value.title,
           address: this.form.value.description,
           staticMapImageUrl: this.form.value.staticMapImageUrl,
           location: {lat: this.form.value.location.lat, lng: this.form.value.location.lng},
-          user_id: 1
+          user_id: this.user
         }
 
         this.addressSrv.addAddress(address).subscribe(

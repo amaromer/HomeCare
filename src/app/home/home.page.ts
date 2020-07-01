@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IonSlides } from '@ionic/angular';
+import { IonSlides, Platform } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -8,6 +8,8 @@ import { IonSlides } from '@ionic/angular';
 })
 export class HomePage implements OnInit {
 
+  subscription;
+  
   sliderConfig = [{
     initialSlide: 1,
     speed: 300
@@ -18,9 +20,10 @@ export class HomePage implements OnInit {
     {id: 2, image: "assets/slides/3.jpg", item: "Third Slide"}
   ];
 
-  constructor() { }
+  constructor(private platform: Platform) { }
 
   ngOnInit() {   
+   
   }
 
   slidesDidLoad(slides: IonSlides) {
@@ -29,6 +32,12 @@ export class HomePage implements OnInit {
   }
 
   goToCartPage() {}
+
+  ionViewDidEnter(){
+    this.subscription = this.platform.backButton.subscribe(()=>{
+        navigator['app'].exitApp();
+    });
+  }
 
 
 }

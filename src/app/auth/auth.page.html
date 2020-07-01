@@ -1,6 +1,10 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>{{ isLogin ? 'Login' : 'Signup' }}</ion-title>
+  <ion-toolbar color="primary">
+    <ion-title *ngIf="isLogin">{{ 'login'| translate}}</ion-title>
+    <ion-title *ngIf="!isLogin">{{ 'signup'  | translate}}</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -11,7 +15,7 @@
         <ion-col size-sm="6" offset-sm="3">
           <ion-list>
             <ion-item>
-              <ion-label position="floating">E-Mail</ion-label>
+              <ion-label position="floating">{{'phone' | translate}}</ion-label>
               <ion-input
                 
                 ngModel
@@ -26,11 +30,11 @@
               lines="none"
             >
               <ion-label>
-                Should be a valid email address.
+                {{'phone_message' | translate }}
               </ion-label>
             </ion-item>
             <ion-item>
-              <ion-label position="floating">Password</ion-label>
+              <ion-label position="floating">{{'password' | translate}}</ion-label>
               <ion-input
                 type="password"
                 ngModel
@@ -45,9 +49,55 @@
               lines="none"
             >
               <ion-label>
-                Should at least be 6 characters long.
+                {{'password_message' | translate}}
               </ion-label>
             </ion-item>
+
+            <div *ngIf="!isLogin">
+              <ion-item>
+                <ion-label position="floating">{{'name' | translate}}</ion-label>
+              <ion-input
+                
+                ngModel
+                name="username"
+                required
+                
+                #nameCtrl="ngModel"
+              ></ion-input>
+              </ion-item>
+              <ion-item
+              *ngIf="!nameCtrl.valid && nameCtrl.touched"
+              lines="none"
+            >
+              <ion-label>
+                {{'name_message' | translate}}
+              </ion-label>
+            </ion-item>
+
+              <ion-item>
+                <ion-label position="floating">{{'email' | translate}}</ion-label>
+              <ion-input
+                
+                ngModel
+                name="email2"
+                required
+                email
+                #email2Ctrl="ngModel"
+              ></ion-input>
+              </ion-item>
+              <ion-item
+              *ngIf="!email2Ctrl.valid && email2Ctrl.touched"
+              lines="none"
+            >
+              <ion-label>
+                {{'email_message' | translate}}
+              </ion-label>
+            </ion-item>
+
+
+
+            </div>
+
           </ion-list>
         </ion-col>
       </ion-row>
@@ -60,7 +110,9 @@
             expand="block"
             (click)="onSwitchAuthMode()"
           >
-            Switch to {{ isLogin ? 'Signup' : 'Login' }}
+            {{ 'switch_to' | translate }}
+            <span *ngIf='isLogin'>{{'signup' | translate }}</span>
+             <span *ngIf="!isLogin">{{'login' | translate }}</span>
           </ion-button>
           <ion-button
             type="submit"
@@ -68,7 +120,8 @@
             expand="block"
             [disabled]="!f.valid"
           >
-            {{ isLogin ? 'Login' : 'Signup' }}
+          <span *ngIf='!isLogin'>{{'signup' | translate }}</span>
+          <span *ngIf="isLogin">{{'login' | translate }}</span>
           </ion-button>
         </ion-col>
       </ion-row>

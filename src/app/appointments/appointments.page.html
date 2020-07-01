@@ -14,9 +14,9 @@
       </ion-col>     
       <ion-col size="7">
         <div style="padding: 0px 15px;"> 
-          <div style="font-size: 24px;">Order: #{{item.id}}</div>          
+          <div style="font-size: 24px;">{{'order' | translate}}: #{{item.id}}</div>          
           <div>{{item.total}} {{'omr' | translate}}</div>
-          <ion-button fill="outline" slot="end" routerLink="appointment-detail/{{item.id}}">View</ion-button>
+          <ion-button fill="outline" slot="end" routerLink="appointment-detail/{{item.id}}">{{"view" | translate}}</ion-button>
         </div>  
       </ion-col>
     </ion-row>  
@@ -25,7 +25,10 @@
 
   <div *ngIf="isLoading">
     <ion-spinner style="margin: auto; width:100%;" color="primary"></ion-spinner>
+  </div>
 
+  <div *ngIf="!isLoading && data.length == 0">
+    {{'no_previous_order' | translate}}
   </div>
 
   

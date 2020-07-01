@@ -1,9 +1,11 @@
 <ion-header>
   <ion-toolbar color='primary'>
+    <ion-title>{{'select_service' | translate}}</ion-title>
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
   </ion-toolbar>
+
 </ion-header>
 
 <ion-content>
@@ -21,12 +23,12 @@
                 <span>{{entry.title}}</span>
               </ng-template>      
               
-              - {{entry.price}} OMR
+              - {{entry.price}} {{"omr" | translate}}
             </ion-label>
             <ion-checkbox slot="end" [(ngModel)]="entry.isChecked"></ion-checkbox>
         </ion-item>
 
-        <ion-button class="ion-padding ion-center" expand="block" (click)="checkout()" routerLink="/checkout">checkout</ion-button>
+        <ion-button class="ion-padding ion-center" expand="block" (click)="checkout()">{{"check_out" | translate}}</ion-button>
     </ion-list>
   </div>
   <div *ngIf="!isLoading && services.length == 0"> 

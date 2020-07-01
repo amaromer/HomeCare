@@ -6,10 +6,8 @@
           <ion-toolbar color="primary">
             <ion-title>{{'TITLES.menu' | translate}}</ion-title>
             <ion-buttons slot="end">
-              <ion-button fill="clear" routerLink="/bs-currency-list" routerDirection="forward">
-                <ion-icon slot="icon-only" class="usd-icon" name="logo-usd"></ion-icon>
-              </ion-button>
-              <ion-button fill="clear" routerLink="/bs-language" routerDirection="forward">
+              
+              <ion-button fill="clear" routerLink="/setting" routerDirection="forward">
                 <ion-icon name="globe"></ion-icon>
               </ion-button>              
             </ion-buttons>
@@ -21,7 +19,7 @@
           <ion-menu-toggle auto-hide="false" class="ion-no-padding">
             <ion-item lines="full">              
               <div class="login-item"></div>
-              <ion-item lines="none" routerLink="/bs-login" routerDirection="forward">
+              <ion-item *ngIf="!user" lines="none" routerLink="/auth" routerDirection="forward">
                 <ion-avatar>
                   <img src="assets/avatar.png" />
                 </ion-avatar>
@@ -29,6 +27,16 @@
                   <h2>{{'TITLES.login' | translate}}</h2>
                   <p>{{'TITLES.login_phrase' | translate}}</p>
                 </ion-label>
+              </ion-item>
+              <ion-item *ngIf="user">
+                <ion-avatar>
+                  <img src="assets/avatar.png" />
+                </ion-avatar>
+                <ion-label class="ion-padding">
+                  <h2>{{'welcome' | translate }}</h2>
+                  <p>{{user.username}}</p>
+                </ion-label>
+                  <ion-button (click)="logout()">{{'logout' | translate}}</ion-button>
               </ion-item>
             </ion-item>
           </ion-menu-toggle>
